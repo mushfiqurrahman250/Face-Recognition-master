@@ -18,17 +18,19 @@ def load_images_from_folder(folder):
         return images
 
 
-folder = "C:/Users/ASUS/Documents/aligned_images_DB"
+directory = "C:/Users/ASUS/Documents/aligned_images_DB/"
 
-load_images_from_folder(folder)
+for mydirectory in os.walk(directory):
 
-f = []
-for (_, _, filenames) in walk(folder):
-    break
+    # mypath = "C:/Users/ASUS/Documents/aligned_images_DB/Aaron_Eckhart/0/"
+    print(mydirectory)
+    for mypath in os.walk(mydirectory):
+        for (_, _, filenames) in walk(mypath):
+            break
 
-for i in range(0, math.ceil(len(filenames) / 100 * 70)):
-    add_to_database(filenames[i])
+        for i in range(0, math.ceil(len(filenames) / 100 * 70)):
+            add_to_database(filenames[i])
 
-for j in range(i + 1, len(filenames)):
-    if filenames[j] != "":
-        add_to_database2(filenames[j])
+        for j in range(i + 1, len(filenames)):
+            if filenames[j] != "":
+                add_to_database2(filenames[j])
