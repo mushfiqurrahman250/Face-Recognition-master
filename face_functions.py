@@ -76,26 +76,32 @@ def prepare_database1(model):
     return database
 
 
-def add_to_database(name):
+def add_to_database(name, folder_directory,pname):
     # name += '.jpg'
     name = name[0:len(name) - 4]
     path = os.path.join('images', name)
-    image = webcam(path, name);
+    image = webcam(path, name, folder_directory,pname);
 
 
-def add_to_database2(name):
+def add_to_database2(name, folder_directory,pname):
     # name += '.jpg'
     name = name[0:len(name) - 4]
     path = os.path.join('test', name)
-    image = webcam(path, name);
+    image = webcam(path, name, folder_directory,pname);
 
 
-def webcam(path, name):
+def webcam(path, name, folder_directory,pname):
+    global cut_image
     PADDING = 25
     face = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
     # webcam = cv2.VideoCapture(0)
+    count = 0
     while True:
-        filename = 'C:/Users/ASUS/Documents/aligned_images_DB/Aaron_Eckhart/0/' + name + '.jpg'
+        count += 1
+        if (count == 2):
+            break
+
+        filename = folder_directory + name + '.jpg'
 
         print(filename)
         img = cv2.imread(filename)
@@ -118,7 +124,7 @@ def webcam(path, name):
                 height, width, channels = frame.shape
                 cut_image = frame[max(0, y1):min(height, y2), max(0, x1):min(width, x2)]
                 print(path)
-                cv2.imwrite(path + ".jpg", cut_image)
+                cv2.imwrite(path + ',' + pname + ",.jpg", cut_image)
             break
 
         cv2.imshow('img', img)
@@ -127,6 +133,9 @@ def webcam(path, name):
             break
 
     #    webcam.release()
+    if not cut_image.any() and count == 2:
+        return 0
+
     plt.imshow(img)
     cv2.destroyAllWindows()
     return cut_image
@@ -148,13 +157,12 @@ def recognise_face(imagepath: object, database: object, model: object) -> object
     for (name, db_enc) in database.items():
 
         dist = np.linalg.norm(db_enc - encoding)
-        # print('distance for %s is %s' % (name, dist))
+
         if dist < min_dist:
             min_dist = dist
             identity = name
 
-    if min_dist > 0.6:
-        # speak('cant recognize face', 2)
+    if min_dist > 0.5:
 
         return str(0)
 
@@ -170,13 +178,12 @@ def recognise_face1(imagepath: object, database: object, model: object) -> objec
     for (name, db_enc) in database.items():
 
         dist = np.linalg.norm(db_enc - encoding)
-        # print('distance for %s is %s' % (name, dist))
+
         if dist < min_dist:
             min_dist = dist
             identity = name
 
-    if min_dist > 0.6:
-        # speak('cant recognize face', 2)
+    if min_dist > 0.4:
 
         return str(0)
 

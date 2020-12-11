@@ -1,6 +1,4 @@
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
+
 from face_functions import speak, add_to_database
  
 

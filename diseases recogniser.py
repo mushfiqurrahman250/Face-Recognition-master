@@ -1,8 +1,7 @@
-import csv
 from fr_utils import *
 from inception_network import *
 from face_functions import *
-
+import csv
 K.set_image_data_format('channels_first')
 
 
@@ -32,38 +31,17 @@ if __name__ == '__main__':
     # if decision == ('y' or 'Y'):
     # images = []
     database = prepare_database(model)
-    i = 1
-    for filename in os.listdir("test"):
-        path = os.path.join("test", filename)
-        x = filename.split(",", 2)
 
-        print(x)
-
-        face = recognise_face(path, database, model)
+    for filename in os.listdir("diseases"):
+        path = os.path.join("diseases", filename)
+        print(filename)
+        face = recognise_face1(path, database, model)
         # face = recognise_face1(path, database, model)
-        y = face.split(",", 2)
 
-        print(y)
-        print("\n")
+        print("Diseases is: " + face)
 
-        with open('face.csv', 'a', newline='') as fs:
+        with open('disease.csv', 'a', newline='') as fs:
             a = csv.writer(fs, delimiter=",")
             data = []
-            if len(x) >= 2 and len(y) >= 2 and x[1] == y[1]:
-                k = 1
-
-            else:
-                k = 0
-
-            if y[0] == '0':
-                p = 0
-
-            else:
-                p = 1
-
-            data = [x, y, p, k]
+            data = [filename, face]
             a.writerow(data)
-
-#with open('face.csv', 'w') as csvfile:
-    #fieldnames = ['a', 'b', 'predicted', 'actual']
-    #writer = csv.DictWriter(csvfile, fieldnames=fieldnames)

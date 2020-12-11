@@ -1,16 +1,14 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-import os
 
 
 def face_cut(path, name):
     global cut_image
     PADDING = 0
     face = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-    #webcam = cv2.VideoCapture(0)
 
-    filename = 'D:/untitled/Face-Recognition-master/images/' + name + '.jpg'
+    filename = 'D:/untitled/Face-Recognition-master/test/' + name + '.jpg'
 
     print(filename)
     img = cv2.imread(filename)
@@ -33,7 +31,7 @@ def face_cut(path, name):
             img = cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 255, 255), 2)
             height, width, channels = frame.shape
             cut_image = frame[max(0, y1):min(height, y2), max(0, x1):min(width, x2)]
-            cv2.imwrite(path + name + ".jpg", cut_image)
+            cv2.imwrite(path + name + ",.jpg", cut_image)
             #print(path)
 
 
@@ -47,10 +45,10 @@ def face_cut(path, name):
             height, width, channels = frame.shape
             cut_image = frame[max(0, y11):min(height, y21), max(0, x11):min(width, x21)]
             print(path)
-            cv2.imwrite(path + name + "_left_cheek.jpg", cut_image)
+            cv2.imwrite(path + name + ",left_cheek.jpg", cut_image)
             #cv2.imshow('img', cut_image)
             #k = cv2.waitKey(730) & 0xff
-            cv2.imwrite(path + name +".jpg", cut_image)
+
 
             # right_cheek
             x12 = int(x + w/2)
@@ -62,7 +60,7 @@ def face_cut(path, name):
             height, width, channels = frame.shape
             cut_image = frame[max(0, y12):min(height, y22), max(0, x12):min(width, x22)]
             #print(path)
-            cv2.imwrite(path + name + "_right_cheek.jpg", cut_image)
+            cv2.imwrite(path + name + ",right_cheek.jpg", cut_image)
 
             # forehead
             x13 = x
@@ -74,19 +72,8 @@ def face_cut(path, name):
             height, width, channels = frame.shape
             cut_image = frame[max(0, y13):min(height, y23), max(0, x13):min(width, x23)]
             #print(path)
-            cv2.imwrite(path + name + "_forehead.jpg", cut_image)
+            cv2.imwrite(path + name + ",forehead.jpg", cut_image)
 
-            # full image
-            # x13 = x
-            # y13 = y
-            # x23 = x + w
-            # y23 = y+h
-            #
-            # img = cv2.rectangle(frame, (x13, y13), (x23, y23), (255, 255, 255), 2)
-            # height, width, channels = frame.shape
-            # cut_image = frame[max(0, y13):min(height, y23), max(0, x13):min(width, x23)]
-            # # print(path)
-            # cv2.imwrite(path + name + ".jpg", cut_image)
             break
 
     # cv2.imshow('img', img)
@@ -144,6 +131,7 @@ if __name__ == '__main__':
     face = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
     img = cv2.imread('temp1.JPG', 1)
     frame = img
+    #frame = np.asarray(frame, dtype=np.uint8)
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces_coord = face.detectMultiScale(gray, 1.2, 7, minSize=(50, 50))
