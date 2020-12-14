@@ -21,7 +21,6 @@ entries = os.listdir(directory)
 person =-1
 for mydirectory in os.walk(directory):
 
-
     for i in range(0, len(mydirectory[1])):
         new_directory = directory + mydirectory[1][i]
         for mypath in os.walk(new_directory):

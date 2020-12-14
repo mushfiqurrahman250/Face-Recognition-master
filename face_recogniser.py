@@ -35,13 +35,13 @@ if __name__ == '__main__':
     i = 1
     for filename in os.listdir("test"):
         path = os.path.join("test", filename)
-        x = filename.split(",", 2)
+        x = filename.split(",", 3)
 
         print(x)
 
         face = recognise_face(path, database, model)
         # face = recognise_face1(path, database, model)
-        y = face.split(",", 2)
+        y = face.split(",", 3)
 
         print(y)
         print("\n")
@@ -49,21 +49,24 @@ if __name__ == '__main__':
         with open('face.csv', 'a', newline='') as fs:
             a = csv.writer(fs, delimiter=",")
             data = []
-            if len(x) >= 2 and len(y) >= 2 and x[1] == y[1]:
+            if len(x) >= 2 and len(y) >= 2 and (x[1] == y[1] or x[2] == y[2]):
+                k = 1
+                p = 1
+
+            elif y[0] == '0':
+                p = 0
                 k = 1
 
             else:
-                k = 0
-
-            if y[0] == '0':
-                p = 0
-
-            else:
                 p = 1
+                k = 0
 
             data = [x, y, p, k]
             a.writerow(data)
 
-#with open('face.csv', 'w') as csvfile:
-    #fieldnames = ['a', 'b', 'predicted', 'actual']
-    #writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+# with open('face.csv', "a") as csvfile:
+#     writer = csv.writer(csvfile)
+#     writer.writerow(['a', 'b', 'predicted', 'actual'])
+#
+# exit()
+

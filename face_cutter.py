@@ -23,15 +23,15 @@ def face_cut(path, name):
         # cv2.imwrite('img_test.jpg',faces[0])
 
         for (x, y, w, h) in faces_coord:
-            x1 = x
-            y1 = y
-            x2 = x + w
-            y2 = y + h
+            #x1 = x
+            #y1 = y
+            #x2 = x + w
+            #y2 = y + h
 
-            img = cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 255, 255), 2)
-            height, width, channels = frame.shape
-            cut_image = frame[max(0, y1):min(height, y2), max(0, x1):min(width, x2)]
-            cv2.imwrite(path + name + ",.jpg", cut_image)
+            #img = cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 255, 255), 2)
+            #height, width, channels = frame.shape
+            #cut_image = frame[max(0, y1):min(height, y2), max(0, x1):min(width, x2)]
+            #cv2.imwrite(path + name + ",.jpg", cut_image)
             #print(path)
 
 
@@ -45,7 +45,7 @@ def face_cut(path, name):
             height, width, channels = frame.shape
             cut_image = frame[max(0, y11):min(height, y21), max(0, x11):min(width, x21)]
             print(path)
-            cv2.imwrite(path + name + ",left_cheek.jpg", cut_image)
+            cv2.imwrite(path + name + "left_cheek,.jpg", cut_image)
             #cv2.imshow('img', cut_image)
             #k = cv2.waitKey(730) & 0xff
 
@@ -60,7 +60,7 @@ def face_cut(path, name):
             height, width, channels = frame.shape
             cut_image = frame[max(0, y12):min(height, y22), max(0, x12):min(width, x22)]
             #print(path)
-            cv2.imwrite(path + name + ",right_cheek.jpg", cut_image)
+            cv2.imwrite(path + name + "right_cheek,.jpg", cut_image)
 
             # forehead
             x13 = x
@@ -72,7 +72,7 @@ def face_cut(path, name):
             height, width, channels = frame.shape
             cut_image = frame[max(0, y13):min(height, y23), max(0, x13):min(width, x23)]
             #print(path)
-            cv2.imwrite(path + name + ",forehead.jpg", cut_image)
+            cv2.imwrite(path + name + "forehead,.jpg", cut_image)
 
             break
 
