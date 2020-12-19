@@ -50,23 +50,19 @@ if __name__ == '__main__':
             a = csv.writer(fs, delimiter=",")
             data = []
             if len(x) >= 2 and len(y) >= 2 and (x[1] == y[1] or x[2] == y[2]):
-                k = 1
-                p = 1
+                filename = x[1]
+                p = y[1]
 
             elif y[0] == '0':
                 p = 0
-                k = 1
+                filename = 0
 
             else:
-                p = 1
-                k = 0
+                p = y[1]
+                filename = x[1]
 
-            data = [x, y, p, k]
+            data = [x, y, p, filename]
             a.writerow(data)
 
-# with open('face.csv', "a") as csvfile:
-#     writer = csv.writer(csvfile)
-#     writer.writerow(['a', 'b', 'predicted', 'actual'])
-#
-# exit()
+
 

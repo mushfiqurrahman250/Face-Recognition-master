@@ -8,7 +8,7 @@ def face_cut(path, name):
     PADDING = 0
     face = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-    filename = 'D:/untitled/Face-Recognition-master/test/' + name + '.jpg'
+    filename = 'D:/untitled/Face-Recognition-master/images/' + name + '.jpg'
 
     print(filename)
     img = cv2.imread(filename)

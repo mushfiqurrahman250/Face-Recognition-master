@@ -162,7 +162,7 @@ def recognise_face(imagepath: object, database: object, model: object) -> object
             min_dist = dist
             identity = name
 
-    if min_dist > 0.4:
+    if min_dist > 0.3:
 
         return str(0)
 
@@ -183,7 +183,7 @@ def recognise_face1(imagepath: object, database: object, model: object) -> objec
             min_dist = dist
             identity = name
 
-    if min_dist > 0.4:
+    if min_dist > 0.3:
 
         return str(0)
 

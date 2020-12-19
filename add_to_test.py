@@ -4,7 +4,7 @@ from os import walk
 
 from face_cutter import face_cut
 
-mypath = "D:/untitled/Face-Recognition-master/test/"
+mypath = "D:/untitled/Face-Recognition-master/images/"
 f = []
 for (_, _, filenames) in walk(mypath):
     break
